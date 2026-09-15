@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AERONOVA — Autonomous Drone Systems</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--green:#76b900;--green-light:#bff230;--black:#000000;--near-black:#0a0a0a;--card-bg:#111111;--white:#ffffff;--gray-300:#a7a7a7;--gray-400:#898989;--gray-500:#757575;--border:#2a2a2a;--border-green:2px solid #76b900}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--black);color:var(--white);line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+/* NAV */
+nav{position:sticky;top:0;z-index:50;background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-size:15px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.logo i{width:28px;height:28px;background:var(--green);display:grid;place-items:center;border-radius:2px;font-size:14px;color:#000}
+.nav-links{display:flex;gap:28px;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.02em;color:var(--white)}
+.nav-links a:hover{color:var(--green)}
+.nav-cta{border:var(--border-green);padding:9px 16px;border-radius:2px;font-size:14px;font-weight:700;background:transparent;color:var(--white)}
+.nav-cta:hover{background:var(--green);color:#000}
+/* HERO */
+.hero{padding:64px 0 32px;display:grid;grid-template-columns:1.05fr 0.95fr;gap:48px;align-items:center}
+.eyebrow{color:var(--green);font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:16px}
+.hero h1{font-size:44px;font-weight:700;line-height:1.15;letter-spacing:-0.02em;margin-bottom:16px}
+.hero h1 span{color:var(--green)}
+.hero p{color:var(--gray-300);font-size:16px;line-height:1.6;max-width:520px;margin-bottom:28px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.btn-primary{background:var(--green);color:#000;padding:13px 22px;border-radius:2px;font-weight:700;font-size:15px;border:1px solid var(--green)}
+.btn-primary:hover{background:var(--green-light)}
+.btn-ghost{border:2px solid var(--green);padding:11px 20px;border-radius:2px;font-weight:700;font-size:15px;background:transparent;color:var(--white)}
+.btn-ghost:hover{background:rgba(118,185,0,0.12)}
+.hero-visual{position:relative;border:1px solid #222;border-radius:2px;overflow:hidden;background:#0a0a0a;box-shadow:rgba(0,0,0,0.4) 0 8px 30px}
+.hero-visual img{width:100%;height:420px;object-fit:cover;display:block}
+.hero-badge{position:absolute;bottom:14px;left:14px;right:14px;background:rgba(0,0,0,0.72);backdrop-filter:blur(8px);border:1px solid rgba(118,185,0,0.35);border-radius:2px;padding:14px;display:flex;justify-content:space-between;gap:12px}
+.badge-item{flex:1;text-align:center;border-right:1px solid #222}
+.badge-item:last-child{border:0}
+.badge-item b{display:block;font-size:18px;font-weight:700}
+.badge-item span{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-400)}
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin:32px 0}
+.stat{padding:22px 24px;border-right:1px solid var(--border);text-align:center}
+.stat:last-child{border:0}
+.stat b{font-size:22px;display:block}
+.stat span{font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-400)}
+/* SECTIONS */
+.section{padding:56px 0;border-top:1px solid #0f0f0f}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:28px;flex-wrap:wrap}
+.section-head h2{font-size:24px;font-weight:700;line-height:1.25}
+.section-head p{color:var(--gray-300);max-width:460px;font-size:15px;line-height:1.6}
+.label{color:var(--green);font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:8px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:var(--card-bg);border:1px solid #1e1e1e;border-radius:2px;overflow:hidden;transition:all .2s}
+.card:hover{border-color:rgba(118,185,0,0.35);box-shadow:0 8px 24px rgba(0,0,0,0.45)}
+.card img{width:100%;height:180px;object-fit:cover;display:block}
+.card-body{padding:18px}
+.card-body h3{font-size:16px;font-weight:700;margin-bottom:6px}
+.card-body p{font-size:13px;color:var(--gray-400);line-height:1.6;margin-bottom:12px}
+.card-meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.pill{font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;background:#1a1a1a;border:1px solid #262626;padding:5px 8px;border-radius:2px;color:var(--gray-300)}
+.card-link{font-size:13px;font-weight:700;color:var(--green);border-bottom:2px solid var(--green);padding-bottom:2px}
+.card-link:hover{color:var(--green-light);border-color:var(--green-light)}
+/* TECH GRID */
+.tech{display:grid;grid-template-columns:1fr 1.1fr;gap:36px;align-items:center}
+.tech-list{display:grid;gap:16px}
+.tech-item{display:flex;gap:14px;padding:16px;background:#0f0f0f;border:1px solid #1e1e1e;border-radius:2px}
+.tech-item i{width:36px;height:36px;display:grid;place-items:center;background:rgba(118,185,0,0.12);border:1px solid rgba(118,185,0,0.25);border-radius:2px;color:var(--green);flex-shrink:0;font-style:normal}
+.tech-item h4{font-size:14px;font-weight:700;margin-bottom:4px}
+.tech-item p{font-size:13px;color:var(--gray-400);line-height:1.5}
+.tech-visual{border:1px solid #1e1e1e;border-radius:2px;overflow:hidden;background:#0a0a0a}
+.tech-visual img{width:100%;height:360px;object-fit:cover}
+/* USE CASES */
+.cases{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.case{padding:18px;background:#0f0f0f;border:1px solid #1e1e1e;border-radius:2px;text-align:center}
+.case b{font-size:13px;letter-spacing:0.08em;text-transform:uppercase;display:block;margin:10px 0 6px}
+.case p{font-size:12px;color:var(--gray-400);line-height:1.6}
+/* CTA */
+.cta{margin:40px 0;background:linear-gradient(180deg,#0f0f0f,#080808);border:1px solid #1e1e1e;border-radius:2px;padding:36px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.cta h3{font-size:22px;font-weight:700}
+.cta p{color:var(--gray-400);font-size:14px;margin-top:6px}
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:28px 0 40px;margin-top:20px}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:24px}
+.foot-grid h4{font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray-400);margin-bottom:12px}
+.foot-grid a{display:block;font-size:13px;color:var(--gray-300);padding:4px 0}
+.foot-grid a:hover{color:var(--green)}
+.foot-bottom{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:22px;padding-top:18px;border-top:1px solid #111;color:var(--gray-500);font-size:12px}
+@media(max-width:980px){.hero{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}.tech{grid-template-columns:1fr}.cases{grid-template-columns:1fr 1fr}.stats{grid-template-columns:1fr 1fr}.foot-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.hero h1{font-size:32px}.cards{grid-template-columns:1fr}.nav-links{display:none}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="container nav-inner">
+    <div class="logo"><i>⬢</i> AERONOVA</div>
+    <div class="nav-links">
+      <a href="#">Fleet</a><a href="#">Technology</a><a href="#">Solutions</a><a href="#">Docs</a>
+    </div>
+    <a class="nav-cta" href="#">Request Demo</a>
+  </div>
+</nav>
+
+<div class="container">
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Autonomous aerial intelligence — Since 2019</div>
+      <h1>Air power,<br>engineered for <span>precision.</span></h1>
+      <p>Enterprise drones for mapping, inspection and delivery. 45 min flight, 12 km range, sub-centimeter accuracy — built like GPU hardware, flown like software.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#">Explore Fleet →</a>
+        <a class="btn-ghost" href="#">Watch 45s flight</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=1200&auto=format&fit=crop" alt="Drone in flight">
+      <div class="hero-badge">
+        <div class="badge-item"><b>45 min</b><span>Flight time</span></div>
+        <div class="badge-item"><b>12 km</b><span>Range</span></div>
+        <div class="badge-item"><b>1.2 cm</b><span>Accuracy</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="stat"><b>2,400+</b><span>Enterprises</span></div>
+    <div class="stat"><b>18M</b><span>Flight hours</span></div>
+    <div class="stat"><b>99.2%</b><span>Mission success</span></div>
+    <div class="stat"><b>42</b><span>Countries</span></div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <div class="label">Fleet</div>
+        <h2>Three platforms. Every mission.</h2>
+      </div>
+      <p>From pocketable scout to heavy-lift carrier — same autonomy stack, same green-accented precision.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1465447142348-e9952c393450?q=80&w=800&auto=format&fit=crop" alt="Scout drone">
+        <div class="card-body">
+          <h3>NOVA Scout S1</h3>
+          <p>249g, 34 min, 4K 60fps. Fits in a jacket. For scouting and creator flights.</p>
+          <div class="card-meta"><span class="pill">249g</span><span class="pill">O4 10km</span><span class="pill">4K/60</span></div>
+          <a class="card-link" href="#">View S1 →</a>
+        </div>
+      </div>
+      <div class="card" style="border-color:rgba(118,185,0,0.35)">
+        <img src="https://images.unsplash.com/photo-1507582020474-9a48002a9e11?q=80&w=800&auto=format&fit=crop" alt="Pro drone">
+        <div class="card-body">
+          <h3>NOVA Pro X2 — Most Popular</h3>
+          <p>1.2kg, 45 min, Lidar + RTK. Inspection, mapping and cinema.</p>
+          <div class="card-meta"><span class="pill">RTK 1.2cm</span><span class="pill">Lidar</span><span class="pill">45min</span></div>
+          <a class="card-link" href="#">View X2 →</a>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1527977966376-1c8408f9d211?q=80&w=800&auto=format&fit=crop" alt="Heavy lift drone">
+        <div class="card-body">
+          <h3>NOVA Carrier C1</h3>
+          <p>8 kg payload, 32 min, redundant IMU. For delivery and industrial lift.</p>
+          <div class="card-meta"><span class="pill">8kg</span><span class="pill">IP45</span><span class="pill">32min</span></div>
+          <a class="card-link" href="#">View C1 →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="shop" style="background:#080808;border:1px solid #151515;border-radius:2px;padding:28px">
+    <div class="label">Shop — 10 Resell Picks</div>
+    <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:end;margin-bottom:18px">
+      <h2 style="font-size:24px;font-weight:700">10 drones to resell. Best margin first.</h2>
+      <span style="font-size:12px;color:var(--gray-400)">Demo pricing Sept 2025 • 20 pics + 15s video per drone • links to official store</span>
+    </div>
+    <div id="shopGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px"></div>
+    <div style="font-size:11px;color:var(--gray-500);margin-top:12px">Images: Unsplash placeholders + official DJI/Autel galleries linked. Replace with dealer assets before selling. Margins are estimates — verify with supplier.</div>
+  </section>
+
+  <section class="section">
+    <div class="tech">
+      <div>
+        <div class="label">Technology</div>
+        <h2 style="font-size:22px;font-weight:700;margin:8px 0 14px">Autonomy that sees like a GPU.</h2>
+        <div class="tech-list">
+          <div class="tech-item"><i>◈</i><div><h4>Vision + Lidar Fusion</h4><p>Stereo + ToF + Lidar at 120 Hz. Obstacle avoidance at 27 m/s, even in dust or dusk.</p></div></div>
+          <div class="tech-item"><i>⬡</i><div><h4>RTK + Visual Positioning</h4><p>1.2 cm hover accuracy without GCPs. Holds position in 12 m/s wind.</p></div></div>
+          <div class="tech-item"><i>⬢</i><div><h4>Onboard AI</h4><p>NVIDIA Orin Nano — 40 TOPS. Real-time detection, tracking and 3D reconstruction on the edge.</p></div></div>
+        </div>
+      </div>
+      <div class="tech-visual">
+        <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=900&auto=format&fit=crop" alt="Drone sensors">
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="label">Use cases</div>
+    <div class="cases">
+      <div class="case"><div style="font-size:22px">⬢</div><b>Agriculture</b><p>Multispectral crop health at 5 cm/px.</p></div>
+      <div class="case"><div style="font-size:22px">⬣</div><b>Inspection</b><p>Bridges, towers, roofs — no scaffolding.</p></div>
+      <div class="case"><div style="font-size:22px">◈</div><b>Cinema</b><p>4K 120fps, 10-bit D-Log, 3-axis gimbal.</p></div>
+      <div class="case"><div style="font-size:22px">⬡</div><b>Delivery</b><p>Medical payloads in 12 minutes, BVLOS.</p></div>
+    </div>
+    <div class="cta">
+      <div>
+        <h3>Ready to fly?</h3>
+        <p>Get a pilot, a demo flight and a data sample in 48 hours.</p>
+      </div>
+      <a class="btn-primary" href="#">Book flight test →</a>
+    </div>
+  </section>
+
+  <!-- FORUM -->
+  <section class="section" id="forum" style="background:#080808;border:1px solid #151515;border-radius:2px;padding:0;overflow:hidden">
+    <div style="padding:28px 24px 18px;border-bottom:1px solid #151515;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+      <div>
+        <div class="label">Community</div>
+        <h2 style="font-size:22px;font-weight:700">Pilot Forum</h2>
+        <p style="color:var(--gray-400);font-size:13px;margin-top:4px">Ask, share missions, and get help — 1.2k pilots online</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <input id="forumSearch" placeholder="Search threads..." style="background:#111;border:1px solid #262626;color:#fff;padding:10px 12px;border-radius:2px;width:200px;font-size:13px;outline:none">
+        <button id="newThreadBtn" class="btn-primary" style="padding:10px 16px">+ New Thread</button>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:220px 1fr;min-height:420px">
+      <div style="border-right:1px solid #151515;background:#0a0a0a;padding:16px">
+        <div style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray-400);margin-bottom:10px">Categories</div>
+        <div id="forumCats" style="display:grid;gap:6px"></div>
+        <div style="margin-top:18px;padding:12px;background:#111;border:1px solid #1e1e1e;border-radius:2px">
+          <div style="font-size:12px;font-weight:700;margin-bottom:4px">● Live</div>
+          <div style="font-size:11px;color:var(--gray-400)">RTK tips thread trending</div>
+          <div style="font-size:11px;color:var(--green);margin-top:6px">Join voice →</div>
+        </div>
+      </div>
+      <div style="background:#000">
+        <div id="threadList" style="display:grid"></div>
+        <div id="threadView" style="display:none;padding:18px"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="logo" style="margin-bottom:10px"><i>⬢</i> AERONOVA</div>
+        <p style="font-size:13px;color:var(--gray-400);line-height:1.6;max-width:260px">Industrial aerial intelligence. Built in EU, flown worldwide. Support, training and fleet management included.</p>
+      </div>
+      <div><h4>Fleet</h4><a href="#">Scout S1</a><a href="#">Pro X2</a><a href="#">Carrier C1</a><a href="#">Compare</a></div>
+      <div><h4>Company</h4><a href="#">About</a><a href="#">Careers</a><a href="#">Press</a><a href="#">Contact</a></div>
+      <div><h4>Developers</h4><a href="#">SDK</a><a href="#">RTK Guide</a><a href="#">Safety</a><a href="#">Support</a></div>
+    </div>
+    <div class="foot-bottom"><span>© 2026 Aeronova Systems. Engineered for precision.</span><span style="color:var(--green)">● Systems nominal</span></div>
+  </div>
+</footer>
+<script>
+const shopDrones=[
+ {name:"DJI Mini 4 Pro",price:"$759 ($1,099 Fly More)",margin:"12-15%",cat:"Scout <250g",spec:"249g • 4K/60 • 20km • 34min",desc:"Best volume. Sells itself to beginners/creators — #1 resell.",link:"https://store.dji.com/product/dji-mini-4-pro",video:"https://www.youtube.com/embed/yyM2UqE_Q4M",pics:["https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1465447142348-e9952c393450?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1507582020474-9a48002a9e11?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1527977966376-1c8408f9d211?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1487887235947-7671a6d2fa45?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1446776877081-d282a0f896e2?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1446776877081-d282a0f896e2?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1487887235947-7671a6d2fa45?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1527977966376-1c8408f9d211?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1507582020474-9a48002a9e11?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1465447142348-e9952c393450?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=800&auto=format&fit=crop"]},
+ {name:"Autel EVO Lite+ (non-DJI)",price:"$1,149",margin:"18% ★",cat:"Prosumer Alt",spec:"1\" CMOS • 40min • 12km",desc:"Higher margin vs DJI. Good for customers avoiding DJI.",link:"https://shop.autelrobotics.com",video:"https://www.youtube.com/embed/dQw4w9WgXcQ",pics:["https://images.unsplash.com/photo-1507582020474-9a48002a9e11?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1465447142348-e9952c393450?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1527977966376-1c8408f9d211?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1487887235947-7671a6d2fa45?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1446776877081-d282a0f896e2?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1446776877081-d282a0f896e2?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1487887235947-7671a6d2fa45?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1527977966376-1c8408f9d211?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1465447142348-e9952c393450?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1507582020474-9a48002a9e11?q=80&w=800&auto=format&fit=crop"]},
+ {name:"DJI Air 3",price:"$1,099",margin:"14%",cat:"Prosumer",spec:"Dual cam • 46min • 20km",desc:"Sweet spot for prosumer — best value dual-camera.",link:"https://store.dji.com/product/dji-air-3",video:"https://www.youtube.com/embed/yyM2UqE_Q4M",pics:["https://images.unsplash.com/photo-1527977966376-1c8408f9d211?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1507582020474-9a48002a9e11?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1465447142348-e9952c393450?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1487887235947-7671a6d2fa45?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1446776877081-d282a0f896e2?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1446776877081-d282a0f896e2?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1487887235947-7671a6d2fa45?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1465447142348-e9952c393450?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1507582020474-9a48002a9e11?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1527977966376-1c8408f9d211?q=80&w=800&auto=format&fit=crop"]},
+ {name:"Autel EVO Max 4T",price:"~$8,999",margin:"20% ★",cat:"Enterprise Thermal",spec:"640T • 42min • IP43",desc:"Highest margin — thermal + zoom, DJI alternative.",link:"https://shop.autelrobotics.com",video:"https://www.youtube.com/embed/dQw4w9WgXcQ",pics:["https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1527977966376-1c8408f9d211?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1507582020474-9a48002a9e11?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1465447142348-e9952c393450?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1487887235947-7671a6d2fa45?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1446776877081-d282a0f896e2?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1446776877081-d282a0f896e2?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1487887235947-7671a6d2fa45?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1465447142348-e9952c393450?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1507582020474-9a48002a9e11?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1527977966376-1c8408f9d211?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=800&auto=format&fit=crop"]},
+ {name:"DJI Mavic 3 Pro",price:"$2,199",margin:"13%",cat:"Flagship",spec:"Tri-cam • 43min • 15km",desc:"Halo product — high ticket, serious pilots.",link:"https://store.dji.com/product/dji-mavic-3-pro",video:"https://www.youtube.com/embed/yyM2UqE_Q4M",pics:["https://images.unsplash.com/photo-1465447142348-e9952c393450?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1507582020474-9a48002a9e11?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1527977966376-1c8408f9d211?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1487887235947-7671a6d2fa45?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1446776877081-d282a0f896e2?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1446776877081-d282a0f896e2?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1487887235947-7671a6d2fa45?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1527977966376-1c8408f9d211?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1507582020474-9a48002a9e11?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1465447142348-e9952c393450?q=80&w=800&auto=format&fit=crop"]},
+ {name:"DJI Matrice 350 RTK",price:"~$9,500",margin:"18-22% ★",cat:"Enterprise RTK",spec:"55min • IP45 • RTK",desc:"Top € profit per unit + service contracts.",link:"https://www.dji.com/matrice-350-rtk",video:"https://www.youtube.com/embed/dQw4w9WgXcQ",pics:["https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1465447142348-e9952c393450?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1507582020474-9a48002a9e11?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1527977966376-1c8408f9d211?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1487887235947-7671a6d2fa45?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1446776877081-d282a0f896e2?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1446776877081-d282a0f896e2?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1487887235947-7671a6d2fa45?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1527977966376-1c8408f9d211?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1507582020474-9a48002a9e11?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1465447142348-e9952c393450?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=800&auto=format&fit=crop"]},
+ {name:"DJI Avata 2",price:"$999",margin:"15%",cat:"FPV",spec:"4K • 23min • 13km",desc:"Viral FPV — huge TikTok/Shorts demand.",link:"https://store.dji.com/product/dji-avata-2",video:"https://www.youtube.com/embed/dQw4w9WgXcQ",pics:["https://images.unsplash.com/photo-1487887235947-7671a6d2fa45?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1465447142348-e9952c393450?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1507582020474-9a48002a9e11?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1527977966376-1c8408f9d211?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1446776877081-d282a0f896e2?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1446776877081-d282a0f896e2?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1527977966376-1c8408f9d211?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1507582020474-9a48002a9e11?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1465447142348-e9952c393450?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1487887235947-7671a6d2fa45?q=80&w=800&auto=format&fit=crop"]},
+ {name:"DJI FPV Combo",price:"$999",margin:"14%",cat:"FPV Racing",spec:"140km/h • 20min",desc:"140km/h racing — niche loyal buyers.",link:"https://store.dji.com/product/dji-fpv",video:"https://www.youtube.com/embed/dQw4w9WgXcQ",pics:["https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1465447142348-e9952c393450?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1507582020474-9a48002a9e11?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1527977966376-1c8408f9d211?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1487887235947-7671a6d2fa45?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1446776877081-d282a0f896e2?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1446776877081-d282a0f896e2?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1487887235947-7671a6d2fa45?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1527977966376-1c8408f9d211?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1507582020474-9a48002a9e11?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1465447142348-e9952c393450?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=800&auto=format&fit=crop"]},
+ {name:"DJI Agras T40",price:"~$12,000",margin:"15-18%",cat:"Agriculture",spec:"40L • 7m spray • RTK",desc:"Farm subsidies — recurring chemical + service.",link:"https://www.dji.com/t40",video:"https://www.youtube.com/embed/dQw4w9WgXcQ",pics:["https://images.unsplash.com/photo-1507582020474-9a48002a9e11?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1527977966376-1c8408f9d211?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1465447142348-e9952c393450?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1487887235947-7671a6d2fa45?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1446776877081-d282a0f896e2?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1446776877081-d282a0f896e2?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1487887235947-7671a6d2fa45?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1465447142348-e9952c393450?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1527977966376-1c8408f9d211?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1507582020474-9a48002a9e11?q=80&w=800&auto=format&fit=crop"]},
+ {name:"DJI Inspire 3",price:"$16,499",margin:"10-12%",cat:"Cinema Pro",spec:"8K • Full-frame • 28min",desc:"Cinema rental + sale — biggest ticket.",link:"https://www.dji.com/inspire-3",video:"https://www.youtube.com/embed/dQw4w9WgXcQ",pics:["https://images.unsplash.com/photo-1446776877081-d282a0f896e2?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1465447142348-e9952c393450?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1507582020474-9a48002a9e11?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1527977966376-1c8408f9d211?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1487887235947-7671a6d2fa45?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1507582020474-9a48002a9e11?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1507582020474-9a48002a9e11?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1487887235947-7671a6d2fa45?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1527977966376-1c8408f9d211?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1507582020474-9a48002a9e11?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1465447142348-e9952c393450?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1446776877081-d282a0f896e2?q=80&w=800&auto=format&fit=crop"]},
+];
+const grid=document.getElementById('shopGrid');
+if(grid){
+  grid.innerHTML=shopDrones.map((d,i)=>`
+  <div style="background:#0a0a0a;border:1px solid #1e1e1e;border-radius:2px;overflow:hidden">
+    <div style="position:relative">
+      <img id="shopImg${i}" src="${d.pics[0]}" style="width:100%;height:180px;object-fit:cover;display:block">
+      <div style="position:absolute;top:10px;left:10px;background:rgba(0,0,0,0.7);border:1px solid rgba(118,185,0,0.4);color:#76b900;padding:4px 8px;border-radius:2px;font-size:11px;font-weight:700">${d.cat}</div>
+      <div style="position:absolute;top:10px;right:10px;background:#76b900;color:#000;padding:4px 8px;border-radius:2px;font-size:11px;font-weight:700">${d.margin} margin</div>
+      <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:4px;background:rgba(0,0,0,0.6);padding:4px 6px;border-radius:12px">
+        ${d.pics.map((_,pi)=>`<button onclick="shopGo(${i},${pi})" id="dot${i}_${pi}" style="width:6px;height:6px;border-radius:50%;border:none;background:${pi===0?'#76b900':'#444'}"></button>`).join('')}
+      </div>
+    </div>
+    <div style="padding:14px">
+      <div style="font-size:15px;font-weight:700">${d.name}</div>
+      <div style="font-size:12px;color:var(--gray-400);margin:2px 0">${d.spec}</div>
+      <div style="font-size:12px;color:var(--gray-300);line-height:1.5;margin:6px 0">${d.desc}</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
+        <div style="font-size:13px;font-weight:700">${d.price}</div>
+        <a href="${d.link}" target="_blank" style="font-size:11px;font-weight:700;color:#000;background:#76b900;padding:6px 10px;border-radius:2px">Official →</a>
+      </div>
+      <div style="margin-top:10px;display:grid;grid-template-columns:repeat(10,1fr);gap:4px">
+        ${d.pics.map((p,pi)=>`<img onclick="shopGo(${i},${pi})" src="${p}" style="width:100%;height:32px;object-fit:cover;border-radius:2px;border:1px solid #222;cursor:pointer;opacity:${pi===0?1:0.6}">`).join('')}
+      </div>
+      <div style="margin-top:10px;border:1px solid #111;border-radius:2px;overflow:hidden;background:#000">
+        <div style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-400);padding:6px 8px;border-bottom:1px solid #111">15s official video</div>
+        <iframe src="${d.video}" style="width:100%;height:140px;border:0" allow="autoplay; encrypted-media" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>`).join('');
+  window.shopGo=(i,pi)=>{
+    document.getElementById('shopImg'+i).src=shopDrones[i].pics[pi];
+    shopDrones[i].pics.forEach((_,k)=>{const dot=document.getElementById('dot'+i+'_'+k); if(dot) dot.style.background=k===pi?'#76b900':'#444';});
+  };
+}
+
+const cats=[{id:'all',name:'All threads',count:24},{id:'general',name:'General',count:8},{id:'fleet',name:'Fleet / Hardware',count:7},{id:'sdk',name:'SDK & API',count:5},{id:'missions',name:'Missions',count:4}];
+let threads=[
+  {id:1,cat:'fleet',title:'X2 RTK drift in high wind — fix?',author:'mira.k',time:'2h ago',replies:12,views:342,pinned:true,body:'Getting 3-4cm drift at 12m/s wind with RTK fixed. Any tuning tips?'},
+  {id:2,cat:'missions',title:'[Showcase] Vineyard NDVI mapping — 42ha in one flight',author:'vine_pilot',time:'5h ago',replies:8,views:521,body:'Mapped at 5cm/px with S1 + multispectral.'},
+  {id:3,cat:'sdk',title:'Orin Nano inference: YOLOv8 @ 40 TOPS',author:'dev_ken',time:'9h ago',replies:19,views:890,body:'Sharing my DeepStream pipeline.'},
+  {id:4,cat:'general',title:'New pilot? Start here — checklist before first BVLOS',author:'admin',time:'1d ago',replies:31,views:1203,pinned:true,body:'Pre-flight, airspace, failsafe — 10 things.'},
+  {id:5,cat:'fleet',title:'C1 heavy lift — 8kg medical delivery test',author:'medevac_eu',time:'1d ago',replies:5,views:210,body:'Delivered 6kg payload 11km in 9 min.'},
+  {id:6,cat:'sdk',title:'How to parse RTK NMEA via SDK?',author:'jun_dev',time:'2d ago',replies:14,views:430,body:'SDK v2.4 — getPosition() returns float, but NMEA empty.'},
+];
+let activeCat='all';let activeThread=null;
+const catsEl=document.getElementById('forumCats');const listEl=document.getElementById('threadList');const viewEl=document.getElementById('threadView');const searchEl=document.getElementById('forumSearch');
+function renderCats(){catsEl.innerHTML=cats.map(c=>`<button onclick="filterCat('${c.id}')" style="text-align:left;padding:8px 10px;border-radius:2px;border:1px solid ${activeCat===c.id?'#76b900':'#1e1e1e'};background:${activeCat===c.id?'rgba(118,185,0,0.12)':'#0f0f0f'};color:${activeCat===c.id?'#fff':'#a7a7a7'};font-size:13px;font-weight:600;display:flex;justify-content:space-between"><span>${c.name}</span><span style="background:#1a1a1a;border:1px solid #262626;padding:1px 6px;border-radius:2px;font-size:11px">${c.count}</span></button>`).join('');}
+function filtered(){const q=(searchEl.value||'').toLowerCase();return threads.filter(t=>(activeCat==='all'||t.cat===activeCat) && (!q || t.title.toLowerCase().includes(q) || t.body.toLowerCase().includes(q)));}
+function renderList(){const items=filtered();if(activeThread){viewEl.style.display='block'; listEl.style.display='none'; return;}viewEl.style.display='none'; listEl.style.display='grid';listEl.innerHTML=items.map(t=>`<div onclick="openThread(${t.id})" style="padding:16px 18px;border-bottom:1px solid #151515;display:flex;gap:14px;cursor:pointer;${t.pinned?'background:rgba(118,185,0,0.06);border-left:2px solid #76b900':''}"><div style="min-width:36px;height:36px;border-radius:2px;background:#111;border:1px solid #222;display:grid;place-items:center;font-size:11px;font-weight:700;color:var(--green)">${t.author.slice(0,2).toUpperCase()}</div><div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:600">${t.pinned?'📌 ':''}${t.title}</div><div style="font-size:12px;color:var(--gray-400);margin-top:2px">${t.body}</div><div style="font-size:11px;color:var(--gray-500);margin-top:6px">${t.author} • ${t.time} • <span style="color:var(--green)">${t.replies} replies</span> • ${t.views} views</div></div><div style="font-size:11px;color:var(--gray-500)">${t.cat}</div></div>`).join('') || `<div style="padding:40px;text-align:center;color:var(--gray-400)">No threads found</div>`;}
+function openThread(id){activeThread=threads.find(x=>x.id===id);if(!activeThread) return;viewEl.innerHTML=`<button onclick="backToList()" style="font-size:12px;color:var(--green);background:none;border:none;cursor:pointer;margin-bottom:12px">← Back</button><div style="border:1px solid #1e1e1e;border-radius:2px;overflow:hidden;background:#0a0a0a"><div style="padding:16px 18px;border-bottom:1px solid #151515"><div style="font-size:18px;font-weight:700">${activeThread.title}</div><div style="font-size:12px;color:var(--gray-400);margin-top:6px">${activeThread.author} • ${activeThread.time}</div></div><div style="padding:16px 18px;font-size:13px;color:var(--gray-300)">${activeThread.body}</div><div style="padding:12px 18px;background:#000;border-top:1px solid #151515;display:flex;gap:8px"><input id="replyInput" placeholder="Write a reply..." style="flex:1;background:#111;border:1px solid #262626;color:#fff;padding:10px 12px;border-radius:2px"><button onclick="postReply()" class="btn-primary" style="padding:10px 14px">Reply</button></div></div>`;renderList();}
+function backToList(){activeThread=null;renderList();}
+function filterCat(id){activeCat=id;activeThread=null;renderCats();renderList();}
+function postReply(){const inp=document.getElementById('replyInput');const txt=(inp.value||'').trim();if(!txt)return;activeThread.repliesList=activeThread.repliesList||[];activeThread.repliesList.push({author:'you',text:txt});activeThread.replies++;openThread(activeThread.id);}
+document.getElementById('newThreadBtn').onclick=()=>{const title=prompt('Title:');if(!title)return;const body=prompt('Body:')||'';threads.unshift({id:Date.now(),cat:'general',title,author:'you',time:'just now',replies:0,views:1,body});renderCats();renderList();};
+searchEl.oninput=renderList;renderCats();renderList();
+
+</script>
+</body>
+</html>
