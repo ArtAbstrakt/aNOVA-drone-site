@@ -57,6 +57,26 @@ html{scroll-behavior:smooth}
 .case{transition:all 0.2s ease}
 .case:hover{border-color:rgba(118,185,0,0.3);transform:translateY(-2px)}
 
+/* SPEC CARDS */
+.spec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+.spec-cell{background:#0f0f0f;border:1px solid #1e1e1e;border-radius:2px;padding:14px;text-align:center;transition:all 0.2s}
+.spec-cell:hover{border-color:rgba(118,185,0,0.3)}
+.spec-cell .spec-val{font-size:20px;font-weight:700;color:var(--green)}
+.spec-cell .spec-label{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-500);margin-top:4px}
+/* FEATURED DRONES SECTION */
+.featured-hero{text-align:center;padding:48px 0}
+.featured-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:28px}
+.featured-card{background:#0f0f0f;border:1px solid #1e1e1e;border-radius:2px;overflow:hidden;transition:all 0.3s}
+.featured-card:hover{transform:translateY(-6px);border-color:rgba(118,185,0,0.4)}
+.featured-card img{width:100%;height:180px;object-fit:cover}
+.featured-card .fc-body{padding:18px}
+.featured-card h3{font-size:18px;font-weight:700;margin-bottom:8px}
+.featured-card .fc-specs{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px}
+.featured-card .fc-specs span{color:var(--gray-400)}
+.featured-card .fc-specs b{color:var(--white);float:right}
+.featured-card .fc-price{font-size:24px;font-weight:700;color:var(--green);margin-top:12px}
+
+
 /* HERO */
 .hero{padding:64px 0 32px;display:grid;grid-template-columns:1.05fr 0.95fr;gap:48px;align-items:center}
 .eyebrow{color:var(--green);font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:16px}
@@ -282,6 +302,17 @@ footer{border-top:1px solid var(--border);padding:28px 0 40px;margin-top:20px}
     </div>
   </section>
 
+
+  <!-- FEATURED DRONES -->
+  <section class="section" id="featured" style="background:#080808;border:1px solid #151515;border-radius:2px;padding:28px">
+    <div class="featured-hero">
+      <div class="label">Featured Fleet</div>
+      <h2 style="font-size:32px;font-weight:700;margin-bottom:8px">25 Drones. 100 Photos. Real Specs.</h2>
+      <p style="color:var(--gray-400);font-size:14px">All models with official store links, 4K imagery, and verified margins</p>
+    </div>
+    <div class="featured-grid" id="featuredGrid"></div>
+  </section>
+
   <!-- FORUM -->
   <section class="section" id="forum" style="background:#080808;border:1px solid #151515;border-radius:2px;padding:0;overflow:hidden">
     <div style="padding:28px 24px 18px;border-bottom:1px solid #151515;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
@@ -385,6 +416,25 @@ if('IntersectionObserver' in window){
 // FADE-UP ON SCROLL
 const obsUp=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('fade-up');obsUp.unobserve(e.target)}})},{threshold:0.1});
 document.querySelectorAll('.section,.card,.tech-item,.case').forEach(el=>obsUp.observe(el));
+
+
+// POPULATE FEATURED DRONES
+(function(){
+  const grid=document.getElementById('featuredGrid');
+  if(!grid||typeof shopDrones==='undefined')return;
+  grid.innerHTML=shopDrones.map(d=>`
+    <div class="featured-card">
+      <img src="${d.pics[0]}" alt="${d.name}" loading="lazy">
+      <div class="fc-body">
+        <h3>${d.name}</h3>
+        <div class="fc-specs"><span>Range</span><b>${d.spec}</b></div>
+        <div class="fc-specs"><span>Flight</span><b>${d.margin}</b></div>
+        <div class="fc-price">${d.price}</div>
+        <a class="card-link" href="${d.link}" target="_blank">Official Store →</a>
+      </div>
+    </div>
+  `).join('');
+})();
 
 window.shopGo=(i,pi)=>{
     document.getElementById('shopImg'+i).src=shopDrones[i].pics[pi];
