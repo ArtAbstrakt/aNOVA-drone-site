@@ -3,7 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AERONOVA — Autonomous Drone Systems</title>
+<meta name="description" content="Aeronova — Autonomous Drone Systems. Buy, resell, and fly enterprise drones. DJI, Autel, Skydio, Parrot — 25+ models with 100+ 4K photos.">
+<meta property="og:title" content="AERONOVA — Autonomous Drone Systems">
+<meta property="og:description" content="Enterprise drones for mapping, inspection, and delivery. 25+ models, 100+ 4K photos, best margins.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://images.unsplash.com/photo-1507582020474-9a48002a9e11?q=80&w=1200&auto=format&fit=crop">
+<meta name="twitter:card" content="summary_large_image">
+<title>AERONOVA — Autonomous Drone Systems | Buy, Resell, Enterprise Drones</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--green:#76b900;--green-light:#bff230;--black:#000000;--near-black:#0a0a0a;--card-bg:#111111;--white:#ffffff;--gray-300:#a7a7a7;--gray-400:#898989;--gray-500:#757575;--border:#2a2a2a;--border-green:2px solid #76b900}
@@ -94,8 +100,11 @@ footer{border-top:1px solid var(--border);padding:28px 0 40px;margin-top:20px}
 <nav>
   <div class="container nav-inner">
     <div class="logo"><i>⬢</i> AERONOVA</div>
-    <div class="nav-links">
+    <div class="nav-links" id="navLinks">
       <a href="#">Fleet</a><a href="#">Technology</a><a href="#">Solutions</a><a href="#">Docs</a>
+    </div>
+    <div class="hamburger" id="hamburger" onclick="document.getElementById('navLinks').style.display=document.getElementById('navLinks').style.display==='flex'?'none':'flex'">
+      <span></span><span></span><span></span>
     </div>
     <!-- Shop removed -->
   </div>
@@ -184,11 +193,26 @@ footer{border-top:1px solid var(--border);padding:28px 0 40px;margin-top:20px}
   </section>
 
   <section class="section" id="shop" style="background:#080808;border:1px solid #151515;border-radius:2px;padding:28px">
-    <div class="label">Shop — 10 Resell Picks</div>
+    <div class="label">Shop — 25 Resell Picks</div>
     <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:end;margin-bottom:18px">
-      <h2 style="font-size:24px;font-weight:700">10 drones to resell. Best margin first.</h2>
-      <span style="font-size:12px;color:var(--gray-400)">Demo pricing Sept 2025 • 4 pics × 25 drones = 100 pics + 15s video • links to official store</span>
+      <h2 style="font-size:24px;font-weight:700">25 drones to resell. Best margin first.</h2>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <select id="shopFilter" onchange="filterShop()" style="background:#111;border:1px solid #262626;color:#fff;padding:9px 12px;border-radius:2px;font-size:13px;outline:none">
+          <option value="all">All Drones</option>
+          <option value="FPV">FPV</option>
+          <option value="Prosumer">Prosumer</option>
+          <option value="Agriculture">Agriculture</option>
+          <option value="Enterprise">Enterprise</option>
+          <option value="Scout">Scout</option>
+        </select>
+        <select id="shopSort" onchange="sortShop()" style="background:#111;border:1px solid #262626;color:#fff;padding:9px 12px;border-radius:2px;font-size:13px;outline:none">
+          <option value="margin">Best Margin</option>
+          <option value="price-low">Price: Low→High</option>
+          <option value="price-high">Price: High→Low</option>
+        </select>
+      </div>
     </div>
+    <div id="shopGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px"></div>
     <div id="shopGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px"></div>
     <div style="font-size:11px;color:var(--gray-500);margin-top:12px">Images: Unsplash placeholders + official DJI/Autel galleries linked. Replace with dealer assets before selling. Margins are estimates — verify with supplier.</div>
   </section>
@@ -258,6 +282,14 @@ footer{border-top:1px solid var(--border);padding:28px 0 40px;margin-top:20px}
   </section>
 </div>
 
+<div class="fixed-cta" id="fixedCta">
+  <span style="font-size:12px;color:var(--gray-400)">Book a demo flight</span>
+  <a class="btn-primary" href="#" style="padding:9px 16px;font-size:13px">Book flight test →</a>
+</div>
+<script>
+const scrollCta=()=>{const s=window.scrollY>600;document.getElementById('fixedCta').classList.toggle('visible',s)};
+window.addEventListener('scroll',scrollCta);
+</script>
 <footer>
   <div class="container">
     <div class="foot-grid">
@@ -268,6 +300,14 @@ footer{border-top:1px solid var(--border);padding:28px 0 40px;margin-top:20px}
       <div><h4>Fleet</h4><a href="#">Scout S1</a><a href="#">Pro X2</a><a href="#">Carrier C1</a><a href="#">Compare</a></div>
       <div><h4>Company</h4><a href="#">About</a><a href="#">Careers</a><a href="#">Press</a><a href="#">Contact</a></div>
       <div><h4>Developers</h4><a href="#">SDK</a><a href="#">RTK Guide</a><a href="#">Safety</a><a href="#">Support</a></div>
+    </div>
+    <div class="newsletter">
+      <div>
+        <h4 style="font-size:15px;font-weight:700;margin-bottom:4px">Stay ahead of the market</h4>
+        <p style="font-size:12px;color:var(--gray-400)">Weekly drone pricing, new model drops & reseller tips.</p>
+      </div>
+      <input type="email" placeholder="your@email.com" style="flex:1;min-width:200px">
+      <button onclick="this.nextElementSibling.textContent='Subscribed ✔';this.style.display='none'">Subscribe</button>
     </div>
     <div class="foot-bottom"><span>© 2026 Aeronova Systems. Engineered for precision.</span><span style="color:var(--green)">● Systems nominal</span></div>
   </div>
@@ -303,7 +343,14 @@ if(grid){
       </div>
     </div>
   </div>`).join('');
-  window.shopGo=(i,pi)=>{
+  
+// STEP10 lazy-load observer
+if('IntersectionObserver' in window){
+  const obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){const img=e.target;img.src=img.dataset.src||img.src;img.removeAttribute('data-src');obs.unobserve(img)}})},{rootMargin:'200px'});
+  document.querySelectorAll('img[data-src]').forEach(img=>obs.observe(img));
+}
+
+window.shopGo=(i,pi)=>{
     document.getElementById('shopImg'+i).src=shopDrones[i].pics[pi];
     shopDrones[i].pics.forEach((_,k)=>{const dot=document.getElementById('dot'+i+'_'+k); if(dot) dot.style.background=k===pi?'#76b900':'#444';});
   };
