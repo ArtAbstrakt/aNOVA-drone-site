@@ -206,7 +206,7 @@ footer{border-top:1px solid var(--border);padding:28px 0 40px;margin-top:20px}
 <nav>
   <div class="container nav-inner">
     <div class="logo"><i>⬢</i> AERONOVA</div>
-    <nav aria-label="Main navigation"><div class="nav-links" id="navLinks">
+    <div class="nav-links" id="navLinks" role="navigation" aria-label="Main navigation">
       <a href="#">Fleet</a><a href="#">Technology</a><a href="#">Solutions</a><a href="#">Docs</a>
     </div>
     <div class="hamburger" id="hamburger" role="button" aria-label="Toggle navigation" tabindex="0" onclick="document.getElementById('navLinks').style.display=document.getElementById('navLinks').style.display==='flex'?'none':'flex'">
@@ -473,6 +473,8 @@ footer{border-top:1px solid var(--border);padding:28px 0 40px;margin-top:20px}
   <a class="btn-primary" href="#" style="padding:9px 16px;font-size:13px">Book flight test →</a>
 </div>
 <script>
+function toggleNav(){var n=document.getElementById("navLinks");n.style.display=n.style.display==="flex"?"none":"flex";}
+function initScroll(){document.querySelectorAll("a[href^="#"]").forEach(function(a){a.addEventListener("click",function(e){var h=this.getAttribute("href");if(h&&h.length>1){e.preventDefault();var t=document.querySelector(h);if(t)t.scrollIntoView({behavior:"smooth"})})})});
 const scrollCta=()=>{const s=window.scrollY>600;document.getElementById('fixedCta').classList.toggle('visible',s)};
 window.addEventListener('scroll',scrollCta);
 window.addEventListener("scroll",()=>{document.getElementById("backToTop").classList.toggle("visible",window.scrollY>600});
