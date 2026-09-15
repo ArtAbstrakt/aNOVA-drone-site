@@ -38,7 +38,8 @@ nav{position:sticky;top:0;z-index:50;background:rgba(0,0,0,0.85);backdrop-filter
 .btn-ghost{border:2px solid var(--green);padding:11px 20px;border-radius:2px;font-weight:700;font-size:15px;background:transparent;color:var(--white)}
 .btn-ghost:hover{background:rgba(118,185,0,0.12)}
 .hero-visual{position:relative;border:1px solid #222;border-radius:2px;overflow:hidden;background:#0a0a0a;box-shadow:rgba(0,0,0,0.4) 0 8px 30px}
-.hero-visual img{width:100%;height:420px;object-fit:cover;display:block}
+.hero-visual .hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,0,0,0.4) 0%,rgba(0,0,0,0.7) 100%)}
+.hero-visual{background-size:cover;background-position:center}
 .hero-badge{position:absolute;bottom:14px;left:14px;right:14px;background:rgba(0,0,0,0.72);backdrop-filter:blur(8px);border:1px solid rgba(118,185,0,0.35);border-radius:2px;padding:14px;display:flex;justify-content:space-between;gap:12px}
 .badge-item{flex:1;text-align:center;border-right:1px solid #222}
 .badge-item:last-child{border:0}
@@ -121,9 +122,8 @@ footer{border-top:1px solid var(--border);padding:28px 0 40px;margin-top:20px}
         <a class="btn-ghost" href="#">Watch 45s flight</a>
       </div>
     </div>
-    <div class="hero-visual">
-      <img src="https://images.unsplash.com/photo-1507582020474-9a48002a9e11?q=80&w=4000&auto=format&fit=crop" alt="Drone in flight">
-      
+    <div class="hero-visual" style="background:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2560&auto=format&fit=crop') center/cover no-repeat;min-height:520px">
+      <div class="hero-overlay"></div>
     <div id="mini4pro-4k-gallery" style="margin:18px 0 0;display:grid;grid-template-columns:repeat(5,1fr);gap:8px">
       <img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=4000&auto=format&fit=crop" style="width:100%;height:90px;object-fit:cover;border-radius:2px;border:1px solid #1e1e1e">
       <img src="https://images.unsplash.com/photo-1465447142348-e9952c393450?q=80&w=4000&auto=format&fit=crop" style="width:100%;height:90px;object-fit:cover;border-radius:2px;border:1px solid #1e1e1e">
