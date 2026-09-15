@@ -316,7 +316,9 @@ footer{border-top:1px solid var(--border);padding:28px 0 40px;margin-top:20px}
         </select>
       </div>
     </div>
-    <div id="shopGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px"></div>
+    <div class="search-bar"><span class="search-icon">🔍</span><input type="text" id="shopSearch" placeholder="Search drones by name or spec..."></div>
+<div class="search-results-count"></div>
+<div id="shopGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px"></div>
     <div id="shopGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px"></div>
     <div style="font-size:11px;color:var(--gray-500);margin-top:12px">Images: Unsplash placeholders + official DJI/Autel galleries linked. Replace with dealer assets before selling. Margins are estimates — verify with supplier.</div>
   </section>
@@ -492,6 +494,16 @@ window.addEventListener('scroll',scrollCta);
       </div>
     </div>
   </section>
+
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <button class="close" onclick="closeLightbox()">✕</button>
+    <button class="nav-btn prev" onclick="lbNav(-1)">‹</button>
+    <button class="nav-btn next" onclick="lbNav(1)">›</button>
+    <div class="lightbox-content" id="lbContent"></div>
+    <div class="counter" id="lbCounter"></div>
+  </div>
 
 <footer>
   <div class="container">
