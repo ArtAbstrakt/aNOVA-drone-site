@@ -501,6 +501,12 @@ function filterShop(){const sel=document.getElementById('shopFilter');const cat=
 function sortShop(){const sel=document.getElementById('shopSort');if(!sel)return;const key=sel.value;const grid=document.getElementById('shopGrid');if(!grid)return;const cards=[...grid.querySelectorAll('.shop-card')];cards.sort((a,b)=>{const pa=parseFloat(a.dataset.price||'0'),pb=parseFloat(b.dataset.price||'0');return key==='price-low'?pa-pb:key==='price-high'?pb-pa:0});cards.forEach(c=>grid.appendChild(c));}
 function initScroll(){document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var h=this.getAttribute('href');if(h&&h.length>1){e.preventDefault();var t=document.querySelector(h);if(t)t.scrollIntoView({behavior:'smooth'})}})});}
 document.addEventListener('DOMContentLoaded',function(){initScroll();if(typeof renderCats==='function')renderCats();if(typeof renderList==='function')renderList();});
+
+// LIGHTBOX FUNCTIONS
+function closeLightbox(){document.getElementById("lightbox").classList.remove("active");}
+function lbNav(dir){const lb=document.getElementById("lightbox");const imgs=document.querySelectorAll("#lbContent img");if(!imgs.length)return;const cur=parseInt(lb.dataset.idx||"0");const nxt=Math.max(0,Math.min(imgs.length-1,cur+dir));lb.dataset.idx=nxt;document.getElementById("lbContent").innerHTML=imgs[nxt].outerHTML;document.getElementById("lbCounter").textContent=(nxt+1)+" / "+imgs.length;}
+// SHOP GO
+document.addEventListener("DOMContentLoaded",function(){if(typeof renderCats==="function")renderCats();if(typeof renderList==="function")renderList();});
 </script>
 
   <!-- VIDEO SHOWCASE -->
@@ -559,7 +565,7 @@ const shopDrones=[{name:"DJI Mini 4 Pro",price:"$759",margin:"12-15%",cat:"Scout
 const grid=document.getElementById('shopGrid');
 if(grid){
   grid.innerHTML=shopDrones.map((d,i)=>`
-  <div style="background:#0a0a0a;border:1px solid #1e1e1e;border-radius:2px;overflow:hidden">
+  <div class="shop-card" data-cat="${d.cat.split(" ")[0]}" data-price="${parseFloat(d.price.replace(/[^0-9.]/g,""))}" style="background:#0a0a0a;border:1px solid #1e1e1e;border-radius:2px;overflow:hidden">
     <div style="position:relative">
       <img id="shopImg${i}" src="${d.pics[0]}" style="width:100%;height:180px;object-fit:cover;display:block">
       <div style="position:absolute;top:10px;left:10px;background:rgba(0,0,0,0.7);border:1px solid rgba(118,185,0,0.4);color:#76b900;padding:4px 8px;border-radius:2px;font-size:11px;font-weight:700">${d.cat}</div>
@@ -603,7 +609,7 @@ document.querySelectorAll('.section,.card,.tech-item,.case').forEach(el=>obsUp.o
   const grid=document.getElementById('featuredGrid');
   if(!grid||typeof shopDrones==='undefined')return;
   grid.innerHTML=shopDrones.map(d=>`
-    <div class="featured-card">
+    <div class="featured-card" data-cat="${d.cat.split(" ")[0]}">
       <img src="${d.pics[0]}" alt="${d.name}" loading="lazy">
       <div class="fc-body">
         <h3>${d.name}</h3>
