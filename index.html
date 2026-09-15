@@ -495,6 +495,12 @@ Iterations 1-10 completed:
 10. Accessibility ARIA labels + theme color
 All background images left untouched per instructions.
 */
+
+// FILTER/SORT
+function filterShop(){const sel=document.getElementById('shopFilter');const cat=sel?sel.value:'all';document.querySelectorAll('#shopGrid .shop-card').forEach(c=>{const m=cat==='all'||c.dataset.cat===cat;c.style.display=m?'none':''});}
+function sortShop(){const sel=document.getElementById('shopSort');if(!sel)return;const key=sel.value;const grid=document.getElementById('shopGrid');if(!grid)return;const cards=[...grid.querySelectorAll('.shop-card')];cards.sort((a,b)=>{const pa=parseFloat(a.dataset.price||'0'),pb=parseFloat(b.dataset.price||'0');return key==='price-low'?pa-pb:key==='price-high'?pb-pa:0});cards.forEach(c=>grid.appendChild(c));}
+function initScroll(){document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var h=this.getAttribute('href');if(h&&h.length>1){e.preventDefault();var t=document.querySelector(h);if(t)t.scrollIntoView({behavior:'smooth'})}})});}
+document.addEventListener('DOMContentLoaded',function(){initScroll();if(typeof renderCats==='function')renderCats();if(typeof renderList==='function')renderList();});
 </script>
 
   <!-- VIDEO SHOWCASE -->
