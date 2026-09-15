@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0a0a">
 <meta name="description" content="Aeronova — Autonomous Drone Systems. Buy, resell, and fly enterprise drones. DJI, Autel, Skydio, Parrot — 25+ models with 100+ 4K photos.">
 <meta property="og:title" content="AERONOVA — Autonomous Drone Systems">
 <meta property="og:description" content="Enterprise drones for mapping, inspection, and delivery. 25+ models, 100+ 4K photos, best margins.">
@@ -205,10 +206,10 @@ footer{border-top:1px solid var(--border);padding:28px 0 40px;margin-top:20px}
 <nav>
   <div class="container nav-inner">
     <div class="logo"><i>⬢</i> AERONOVA</div>
-    <div class="nav-links" id="navLinks">
+    <nav aria-label="Main navigation"><div class="nav-links" id="navLinks">
       <a href="#">Fleet</a><a href="#">Technology</a><a href="#">Solutions</a><a href="#">Docs</a>
     </div>
-    <div class="hamburger" id="hamburger" onclick="document.getElementById('navLinks').style.display=document.getElementById('navLinks').style.display==='flex'?'none':'flex'">
+    <div class="hamburger" id="hamburger" role="button" aria-label="Toggle navigation" tabindex="0" onclick="document.getElementById('navLinks').style.display=document.getElementById('navLinks').style.display==='flex'?'none':'flex'">
       <span></span><span></span><span></span>
     </div>
     <!-- Shop removed -->
@@ -301,7 +302,7 @@ footer{border-top:1px solid var(--border);padding:28px 0 40px;margin-top:20px}
     <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:end;margin-bottom:18px">
       <h2 style="font-size:24px;font-weight:700">25 drones to resell. Best margin first.</h2>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <select id="shopFilter" onchange="filterShop()" style="background:#111;border:1px solid #262626;color:#fff;padding:9px 12px;border-radius:2px;font-size:13px;outline:none">
+        <select id="shopFilter" aria-label="Filter drones by category" onchange="filterShop()" style="background:#111;border:1px solid #262626;color:#fff;padding:9px 12px;border-radius:2px;font-size:13px;outline:none">
           <option value="all">All Drones</option>
           <option value="FPV">FPV</option>
           <option value="Prosumer">Prosumer</option>
@@ -309,14 +310,14 @@ footer{border-top:1px solid var(--border);padding:28px 0 40px;margin-top:20px}
           <option value="Enterprise">Enterprise</option>
           <option value="Scout">Scout</option>
         </select>
-        <select id="shopSort" onchange="sortShop()" style="background:#111;border:1px solid #262626;color:#fff;padding:9px 12px;border-radius:2px;font-size:13px;outline:none">
+        <select id="shopSort" aria-label="Sort drones" onchange="sortShop()" style="background:#111;border:1px solid #262626;color:#fff;padding:9px 12px;border-radius:2px;font-size:13px;outline:none">
           <option value="margin">Best Margin</option>
           <option value="price-low">Price: Low→High</option>
           <option value="price-high">Price: High→Low</option>
         </select>
       </div>
     </div>
-    <div class="search-bar"><span class="search-icon">🔍</span><input type="text" id="shopSearch" placeholder="Search drones by name or spec..."></div>
+    <div class="search-bar"><span class="search-icon">🔍</span><input type="search" id="shopSearch" aria-label="Search drones" placeholder="Search drones by name or spec..."></div>
 <div class="search-results-count"></div>
 <div id="shopGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px"></div>
     <div id="shopGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px"></div>
@@ -475,7 +476,23 @@ footer{border-top:1px solid var(--border);padding:28px 0 40px;margin-top:20px}
 const scrollCta=()=>{const s=window.scrollY>600;document.getElementById('fixedCta').classList.toggle('visible',s)};
 window.addEventListener('scroll',scrollCta);
 window.addEventListener("scroll",()=>{document.getElementById("backToTop").classList.toggle("visible",window.scrollY>600});
-<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top" role="button">↑</button>
+
+
+/* CHANGELOG — Autonomous Drone Website Improvements
+Iterations 1-10 completed:
+1. Smooth-scroll + focus outlines + canonical + favicon
+2. Premium hover effects + fade-up scroll animations
+3. Featured Drones Grid with specs
+4. Categories section (FPV/Photography/Commercial/Beginner)
+5. Comparison table + FAQ accordion
+6. Video showcase section + animated stats
+7. Lightbox gallery + search/filter
+8. Lazy-load + responsive images
+9. Back-to-top button + scroll handler
+10. Accessibility ARIA labels + theme color
+All background images left untouched per instructions.
+*/
 </script>
 
   <!-- VIDEO SHOWCASE -->
