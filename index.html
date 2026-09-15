@@ -61,6 +61,16 @@ html{scroll-behavior:smooth}
 .spec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
 .spec-cell{background:#0f0f0f;border:1px solid #1e1e1e;border-radius:2px;padding:14px;text-align:center;transition:all 0.2s}
 .spec-cell:hover{border-color:rgba(118,185,0,0.3)}
+
+/* CATEGORIES */
+.cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:24px}
+.cat-card{background:linear-gradient(135deg,#0f0f0f,#141414);border:1px solid #1e1e1e;border-radius:2px;padding:28px 20px;text-align:center;cursor:pointer;transition:all 0.3s}
+.cat-card:hover{transform:translateY(-4px);border-color:rgba(118,185,0,0.4);box-shadow:0 8px 24px rgba(0,0,0,0.4)}
+.cat-card .cat-icon{font-size:36px;margin-bottom:12px}
+.cat-card h3{font-size:16px;font-weight:700;margin-bottom:6px;letter-spacing:0.04em}
+.cat-card p{font-size:12px;color:var(--gray-500);line-height:1.5}
+.cat-card .cat-count{display:inline-block;margin-top:10px;font-size:11px;font-weight:700;color:var(--green);border:1px solid rgba(118,185,0,0.3);padding:3px 10px;border-radius:12px}
+
 .spec-cell .spec-val{font-size:20px;font-weight:700;color:var(--green)}
 .spec-cell .spec-label{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-500);margin-top:4px}
 /* FEATURED DRONES SECTION */
@@ -302,6 +312,40 @@ footer{border-top:1px solid var(--border);padding:28px 0 40px;margin-top:20px}
     </div>
   </section>
 
+
+
+  <!-- CATEGORIES -->
+  <section class="section" id="categories" style="text-align:center">
+    <div class="label">Categories</div>
+    <h2 style="font-size:32px;font-weight:700;margin-bottom:8px">Find Your Drone</h2>
+    <p style="color:var(--gray-400);font-size:14px;margin-bottom:24px">From pocket scouts to heavy-lift carriers — one autonomy stack, every mission</p>
+    <div class="cat-grid">
+      <div class="cat-card" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">
+        <div class="cat-icon">🏁</div>
+        <h3>FPV Racing</h3>
+        <p>High-speed acrobatic drones with HD video transmission and 360° flips</p>
+        <span class="cat-count">6 models</span>
+      </div>
+      <div class="cat-card" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">
+        <div class="cat-icon">📷</div>
+        <h3>Photography</h3>
+        <p>Cinema-grade 4K/8K with gimbals, D-Log, and 10-bit color depth</p>
+        <span class="cat-count">8 models</span>
+      </div>
+      <div class="cat-card" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">
+        <div class="cat-icon">🏭</div>
+        <h3>Commercial</h3>
+        <p>RTK, thermal, LiDAR — mapping, inspection, agriculture, delivery</p>
+        <span class="cat-count">7 models</span>
+      </div>
+      <div class="cat-card" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">
+        <div class="cat-icon">🌱</div>
+        <h3>Beginner</h3>
+        <p>Sub-250g, foldable, easy controls — perfect for your first flight</p>
+        <span class="cat-count">4 models</span>
+      </div>
+    </div>
+  </section>
 
   <!-- FEATURED DRONES -->
   <section class="section" id="featured" style="background:#080808;border:1px solid #151515;border-radius:2px;padding:28px">
